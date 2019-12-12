@@ -10,7 +10,11 @@ from getpass import getpass
 def main():
 
     password = getpass("Enter password: ")
-    if password != ("lol"):
+    if password == ("lol"):
+        print("U got hacked bro!")
+        sys.exit()
+        
+    if password != ("dallinrules"):
         sys.exit()
     
 
