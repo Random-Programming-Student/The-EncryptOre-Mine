@@ -1,4 +1,5 @@
 import random
+from string import printable as chars
 import sys
 from getpass import getpass
 
@@ -10,16 +11,13 @@ from getpass import getpass
 def main():
 
     password = getpass("Enter password: ")
-    if password == ("lol"):
-        print("U got hacked bro!")
-        sys.exit()
-        
-    if password != ("dallinrules"):
-        sys.exit()
+    #if password != ("lol"): This is plain stupid and adds hours to my debugging time. I have decided to remove it.
+    # Suggestion: You could have a password feature in the future, but make it different for each encryption and then encrypt it sonehow into the file.
+    #    sys.exit()
     
 
-    alphabet = ["a","b","c","d","e","f","g","h", "i", "j", "k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"," ", ",", ".", "!", ":",";","?", "'", "1","2","3","4","5","6","7","8","9","0"]
-    pangram = ["s","p","h","i","n","x","o","f","b","l","a","c","k","q","u","a","r","t","z","j","u","d","g","e","m","y","v","o","w", " ", ",", ".", "!",":",";","?", "'","1","2","3","4","5","6","7","8","9","0"]
+    alphabet = [y for y in chars] # This new code allows all Python printable characters to be supported --- ["a","b","c","d","e","f","g","h", "i", "j", "k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"," ", ",", ".", "!", ":",";","?", "'", "1","2","3","4","5","6","7","8","9","0"] + [y for y in ""]
+    pangram = random.shuffle(alphabet) # ["s","p","h","i","n","x","o","f","b","l","a","c","k","q","u","a","r","t","z","j","u","d","g","e","m","y","v","o","w", " ", ",", ".", "!",":",";","?", "'","1","2","3","4","5","6","7","8","9","0"]
     hourList = []
     for x in range(1,25):
         hourList.append(str(x))
