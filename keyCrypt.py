@@ -12,14 +12,31 @@ class encFile():
     def __init__(self, text: str) -> None:
         self.text = text
 
-    def encrypt(self, alph: str, pang: str) -> str:
+    def encrypt(self, alph: str, pang: str, sep: str) -> str:
+        newSep = []
+        sepr = sep[::-1]
+        for char in sepr:
+            newSep.append(pang[alph.index(char)])
+        separ = ''.join(newSep)
         encryptedText = self.text[::-1] # Encrpytion code goes here...
         newText = []
         for char in encryptedText:
-            newText.append(pang[alph.index(char)])
+            newText.append(pang[alph.index(char)] + separ)
         encryptedText = ''.join(newText)
-        encryptedText = ''.join(format(ord(i), 'b') for i in encryptedText)
         return encryptedText, pang
+
+class decFile(encFile):
+    def decrypt(self, alph: str, pang: str, sep:str) -> str:
+        newSep = []
+        for char in sep:
+            newSep.append(alph[pang.index(char)])
+        separ = ''.join(newSep)[::-1]
+        newText = []
+        for char in encryptedText.split(separ):
+            newText.append(alph[pang.index(char)])
+        decryptedText = ''.join(newText)
+        decryptedText = decryptedText[::-1]
+        return decryptedText
 
 class keyFile():
     def __init__(self, typeArg: str, level: int) -> None:
@@ -29,10 +46,20 @@ class keyFile():
     def initFile(self, encFile: encFile) -> None:
         pass
 
-
-pangram = [y for y in chars]
-alphabet = pangram.copy()
-random.shuffle(pangram)
-file = encFile(input("Input text to encrypt: "))
-text, key = file.encrypt(alphabet, pangram)
-print(text)
+if (False):
+    pangram = [y for y in chars]
+    alphabet = pangram.copy()
+    random.shuffle(pangram)
+    file = encFile(input("Input text to encrypt: "))
+    seperatorWord = input("Please input seperator word (longer word gives higher accuracy but slower performace): ")
+    text, key = file.encrypt(alphabet, pangram, seperatorWord)
+    print("Text:", text)
+    print("Key:", key)
+else:
+    alphabet = [y for y in chars]
+    file = decFile(input("Input text to decrypt: "))
+    seperatorWord = input("Please input seperator word: ")
+    pangram = input("Please input key: ")[1:-1].replace('\'','').split(', ')
+    print(pangram)
+    text = file.decrypt(alphabet, pangram, seperatorWord)
+    print("Text:", text)
